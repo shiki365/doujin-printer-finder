@@ -101,6 +101,8 @@
   .tabbar button[aria-selected=true] { color: var(--fg); font-weight: 700; background: var(--panel);
                                         box-shadow: inset 0 -2px 0 var(--accent); }
   .tabbar button:focus-visible { outline-offset: -2px; }
+  /* On a phone, five short tabs fit without scrolling. */
+  @media (max-width: 480px) { .tabbar button { padding-inline: 3px; font-size: 12px; } }
 
   /* A section of the sheet: its name sits on the rule. */
   fieldset { border: 0; border-top: 1px solid var(--line); margin: 18px 0 0; padding: 2px 0 0; min-width: 0; }
@@ -237,7 +239,7 @@
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   p, li, dd, dt, td, th { word-break: auto-phrase; text-wrap: pretty; }
   /* No settings / preview columns here: main is a plain page, and the tabs sit at its top. */
-  main { display: block; padding: 16px 16px 40px; }
+  main { display: block; }
   main > .tabbar { margin: 0 0 16px; position: static; background: none; border-radius: 0; }
   main > .tabbar button { flex: none; padding: 8px 16px 10px; font-size: 13.5px; }
   main > .tabbar button[aria-selected=true] { background: none; }
@@ -245,7 +247,8 @@
   .list-view { display: grid; gap: 20px; grid-template-columns: minmax(300px, 360px) minmax(0, 1fr); align-items: start; }
   @media (max-width: 900px) { .list-view { grid-template-columns: minmax(0, 1fr); } }
   .row { grid-template-columns: 72px minmax(0, 1fr); }
-  .unit { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; align-items: center; color: var(--muted); }
+  /* The unit after a number has a set width, so the boxes above and below line up. */
+  .unit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(3.6em, auto); gap: 6px; align-items: center; color: var(--muted); }
   input[type=radio] { accent-color: var(--accent); width: 14px; height: 14px; margin: 0; flex: none; transform: translateY(2px); }
   .choice { display: grid; gap: 6px; margin-top: 8px; }
   .choice label { display: flex; gap: 7px; align-items: flex-start; cursor: pointer; }
@@ -268,7 +271,7 @@
   .summary { margin: 0; line-height: 1.7; }
   .printer-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
   .card, .entry { background: var(--panel); border: 1px solid var(--frame); padding: 12px 14px; min-width: 0; }
-  .card.top { border-color: var(--accent); box-shadow: inset 2px 0 0 var(--accent); }
+  .card.top { box-shadow: inset 3px 0 0 var(--accent); }
   .card .head, .entry .head { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; }
   .entry .head { align-items: baseline; }
   .card .name, .entry .name { font-size: 15px; font-weight: 700; color: var(--fg); text-decoration: none; }
@@ -306,7 +309,9 @@
   .back { display: inline-block; color: var(--muted); text-decoration: none; }
   .back:hover { color: var(--fg); text-decoration: underline; }
   .detail h2 { margin: 10px 0 2px; font-size: 20px; }
-  .detail h3 { margin: 0 0 8px; color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .06em; }
+  .detail h3 { margin: 0 0 8px; color: var(--fg); font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+  .detail h3::before { content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 9px 0 2px;
+    background: var(--accent); transform: rotate(45deg); vertical-align: 1px; }
   .detail section { background: var(--panel); border: 1px solid var(--frame); padding: 14px 16px; margin-top: 14px; min-width: 0; }
   .detail .lead { margin: 6px 0 0; color: var(--muted); }
   .fact-list { margin: 0; }
